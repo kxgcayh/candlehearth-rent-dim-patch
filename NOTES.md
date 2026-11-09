@@ -1,8 +1,8 @@
 # Investigation notes
 
-## Decision
+## Initial investigation, superseded by standalone approach below
 
-STOP before building. Neither approach reaches 80%; the project target before modifying game data is 90%. Confidence percentages below estimate meeting the requested behavior while preserving rental logic, speech and compatibility, rather than confidence in the documented failure mechanism.
+The first pass stopped before building. Neither approach reaches 80%; the project target before modifying game data is 90%. Confidence percentages below estimate meeting the requested behavior while preserving rental logic, speech and compatibility, rather than confidence in the documented failure mechanism.
 
 ## Evidence checked
 
@@ -48,6 +48,27 @@ The local fork reports CLI version 0.1.0-audit-fixes.1, which its translation lo
 
 Only this new repository was written intentionally. No game commands, save writes, live installation, packaging or publishing. No subagents. Codex pre-tool and session-start guards reported healthy; canary also reported an unrelated degraded Claude MCP hook.
 
-No MO2 test steps apply: do not create or enable a mod named Candlehearth Rent Dim Patch, and no Candlehearth Rent Dim Patch.esp is supplied. Continue only with a justified higher-confidence mechanism or an explicitly authorized experimental scope.
+At the initial stop no artifact existed. The later user instruction authorized continuing; current installation instructions are in README.md.
 
 Hook candidate: none established. Existing confidence and live-write restrictions prevented an unproven gameplay change. The CLI/package version distinction belongs in the shared tooling notes; reported to t36 because this task restricts writes to this repository.
+
+
+## Standalone native implementation, 0.1.0
+
+User selected investigation of a standalone SKSE plugin. A DLL avoids replacing RentRoomScript, avoids script compilation/VMAD, and adds no Dylbill dependency. It intentionally supersedes the original ESP-only implementation plan. There is no ESP, master list, new form, FOMOD or plugin load-order slot. No Spriggit deserialization of a patch is necessary.
+
+Confidence before implementing: 92% in the approach. Assumptions: the recorded live diagnosis is accurate; the menu tests INFO/shared-response heard state; the verified CommonLib layout matches AE 1.7.104; the winning refusal records remain repeatable and retain their known shared-response links. Live behavior is still unverified, so this is a test candidate, not a verified fix.
+
+The missing API does exist outside vanilla: [Dylbill's source](https://github.com/Dylbill-Iroh/DbSkseFunctions/blob/main/DbSkseFunctions/src/Topic.cpp), read 2026-11-09, implements SetTopicInfoSaidOnce by validating the INFO and assigning topicInfo->saidOnce. No engine call or AddChange is used. This justified using the same existing engine field directly, with original code and without importing Dylbill code. My earlier blanket statement that no Papyrus solution existed was too broad; vanilla lacks the setter, while the extender supplies it.
+
+Native means runtime engine state here, distinct from record-only changes evaluated above. On kDataLoaded, kNewGame and kPostLoadGame the DLL resolves the ten refusal INFOs plus shared response 000813:Candlehearth.esp and marks their runtime saidOnce booleans true. No rent methods or success fragments execute. No speech is played or muted. Gold, timers, ownership, dialogue conditions, text and flags are unchanged. Before a purchase, the success INFO remains the eligible path; after Variable09 becomes 1, the refusal path is already heard. This applies to all rent-duration choices because all are unavailable during an existing rental.
+
+All eleven INFOs must exist and lack SayOnce, and all nine Candlehearth-specific refusals must link to shared INFO 000813. Validation finishes before the first write; a mismatch logs and leaves all state untouched. Record lookup uses each plugin's local IDs so LOOT and ESL indices do not affect it. Candlehearth must be present; no soft dependency is silently ignored, and the missing-mod case is logged. Hard patching the existing mod's INFOs is intentional; copying them would not change the INFOs the existing topics select.
+
+Runtime said state is not explicitly marked changed for save serialization. It is reapplied on new games and after every load. This avoids introducing a persistence system solely for cosmetic dialogue state. It does not promise removal of previously legitimate said-state changes already stored by the game. Shared INFO 000813 is exclusively the refusal response in the inspected Candlehearth YAML. Runtime compatibility checks do not verify an entire third-party plugin hash; another mod can alter dialogue in ways the shape checks do not detect.
+
+Build library: local CommonLibSSE-NG commit 8eaddedd1542290701ccb0e9e88b2af8b3cea597, build-install package. TESTopicInfo::saidOnce is at 0x3A and its shared-response pointer is at 0x28; the AE 1.7.99+ tail extension does not move these members in this header. Restricting both exported metadata and Load to AE 1.7.104 avoids claiming other runtimes tested. No binary hooks, detours, executable patches or assembly thunks.
+
+Binary verification parses the PE export table and SKSE metadata directly in verify_binary.py and is cross-checked with llvm-readobj. It checks AMD64 DLL, Load/Query/Version exports, version 0.1.0, struct dependence, Address Library V5 flag, one supported runtime and zero padding. CommonLib's VersionNumber default constructor fills unused runtime entries as 1.0.0; CMake passes explicit zero entries to avoid advertising those defaults. The build uses one job and the pre-existing installed libraries; no dependency was rebuilt or installed.
+
+DevBench alive on port 8920 returned no response. No in-game success claim is made. Required tests: capital and non-capital innkeepers; daily, weekly and monthly rentals; refusal immediately after purchase with no further charge; save/reload; expiry and re-rental; unchanged Tavern AI Fix room-showing settings. Installation/removal is by the user through MO2 only. No live files or working modlist/report were changed.
