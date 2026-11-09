@@ -29,7 +29,7 @@ python3 verify_binary.py build/native/CandlehearthRentDim.dll
 llvm-readobj --file-headers --coff-exports build/native/CandlehearthRentDim.dll
 ```
 
-release.toml is prepared for the shared tools/mod-release/release.py workflow. Do not run packaging until the user chooses Nexus, GitHub or both; do not publish without explicit instruction. No remote or public release exists. There is no FOMOD because the candidate has a single installable DLL.
+release.toml is prepared for the shared tools/mod-release/release.py workflow. Do not run packaging until the user chooses Nexus, GitHub or both; do not publish without explicit instruction. The source repository is private at https://github.com/kxgcayh/candlehearth-rent-dim-patch. No public release exists. There is no FOMOD because the candidate has a single installable DLL.
 
 The build verifies architecture and metadata, not engine behavior. See README.md for the required in-game tests and NOTES.md for assumptions and limitations.
 
