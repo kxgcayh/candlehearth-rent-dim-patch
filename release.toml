@@ -1,6 +1,6 @@
 name = "CandlehearthRentDimPatch"
 display_name = "Candlehearth Rent Dim Patch"
-version = "0.1.1"
+version = "0.1.2"
 description = "Dim rental refusal topics immediately after a successful rental; AE 1.7.104 test candidate."
 
 [files]

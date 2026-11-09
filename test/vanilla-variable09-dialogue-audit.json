@@ -1,0 +1,20 @@
+[
+  {
+    "topic": "0x6b93f",
+    "info": "0x453ee",
+    "comparisonFlags": 0,
+    "hasFragment": true
+  },
+  {
+    "topic": "0x9cc92",
+    "info": "0x9cc93",
+    "comparisonFlags": 0,
+    "hasFragment": false
+  },
+  {
+    "topic": "0x9cc99",
+    "info": "0x9cc9a",
+    "comparisonFlags": 0,
+    "hasFragment": false
+  }
+]

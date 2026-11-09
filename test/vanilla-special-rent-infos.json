@@ -1,0 +1,175 @@
+[
+  {
+    "topic": "0x6b93f",
+    "info": "0x453ee",
+    "hasFragment": true,
+    "dialogueFlags": "01000000",
+    "conditions": [
+      {
+        "function": 72,
+        "comparisonValue": 1.0,
+        "parameter1": "0x13478"
+      },
+      {
+        "function": 58,
+        "comparisonValue": 5.0,
+        "parameter1": "0x32926"
+      },
+      {
+        "function": 58,
+        "comparisonValue": 10.0,
+        "parameter1": "0x32926"
+      },
+      {
+        "function": 67,
+        "comparisonValue": 1.0,
+        "parameter1": "0x133c6"
+      },
+      {
+        "function": 14,
+        "comparisonValue": 1.0,
+        "parameter1": "0x4c"
+      }
+    ]
+  },
+  {
+    "topic": "0x6b93f",
+    "info": "0xa56d4",
+    "hasFragment": true,
+    "dialogueFlags": "01000000",
+    "conditions": [
+      {
+        "function": 72,
+        "comparisonValue": 1.0,
+        "parameter1": "0x13478"
+      },
+      {
+        "function": 58,
+        "comparisonValue": 5.0,
+        "parameter1": "0x32926"
+      },
+      {
+        "function": 58,
+        "comparisonValue": 10.0,
+        "parameter1": "0x32926"
+      },
+      {
+        "function": 67,
+        "comparisonValue": 1.0,
+        "parameter1": "0x133c6"
+      }
+    ]
+  },
+  {
+    "topic": "0x6b93f",
+    "info": "0x453ef",
+    "hasFragment": false,
+    "dialogueFlags": "00000000",
+    "conditions": [
+      {
+        "function": 72,
+        "comparisonValue": 1.0,
+        "parameter1": "0x13478"
+      },
+      {
+        "function": 58,
+        "comparisonValue": 10.0,
+        "parameter1": "0x32926"
+      },
+      {
+        "function": 58,
+        "comparisonValue": 20.0,
+        "parameter1": "0x32926"
+      }
+    ]
+  },
+  {
+    "topic": "0x9cc99",
+    "info": "0x9cc9a",
+    "hasFragment": false,
+    "dialogueFlags": "00000000",
+    "conditions": [
+      {
+        "function": 72,
+        "comparisonValue": 1.0,
+        "parameter1": "0x13478"
+      },
+      {
+        "function": 67,
+        "comparisonValue": 1.0,
+        "parameter1": "0x133c6"
+      },
+      {
+        "function": 71,
+        "comparisonValue": 1.0,
+        "parameter1": "0x9cc97"
+      },
+      {
+        "function": 14,
+        "comparisonValue": 1.0,
+        "parameter1": "0x4c"
+      }
+    ]
+  },
+  {
+    "topic": "0x9cc99",
+    "info": "0x9cc9b",
+    "hasFragment": true,
+    "dialogueFlags": "00000000",
+    "conditions": [
+      {
+        "function": 72,
+        "comparisonValue": 1.0,
+        "parameter1": "0x13478"
+      },
+      {
+        "function": 67,
+        "comparisonValue": 1.0,
+        "parameter1": "0x133c6"
+      },
+      {
+        "function": 71,
+        "comparisonValue": 1.0,
+        "parameter1": "0x9cc97"
+      },
+      {
+        "function": 14,
+        "comparisonValue": 0.0,
+        "parameter1": "0x4c"
+      },
+      {
+        "function": 47,
+        "comparisonValue": 8.999138737893975e-40,
+        "parameter1": "0xf"
+      }
+    ]
+  },
+  {
+    "topic": "0x9cc99",
+    "info": "0x9cc9c",
+    "hasFragment": false,
+    "dialogueFlags": "00000000",
+    "conditions": [
+      {
+        "function": 72,
+        "comparisonValue": 1.0,
+        "parameter1": "0x13478"
+      },
+      {
+        "function": 67,
+        "comparisonValue": 1.0,
+        "parameter1": "0x133c6"
+      },
+      {
+        "function": 71,
+        "comparisonValue": 1.0,
+        "parameter1": "0x9cc97"
+      },
+      {
+        "function": 14,
+        "comparisonValue": 0.0,
+        "parameter1": "0x4c"
+      }
+    ]
+  }
+]

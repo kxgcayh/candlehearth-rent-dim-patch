@@ -7,6 +7,7 @@
 
 namespace
 {
+    constexpr std::array<RE::FormID, 2> kVanillaRefusals{0x09CC93, 0x09CC9A};
     constexpr std::array<RE::FormID, 9> kCandlehearthRefusals{
         0x832, 0x83A, 0x81A, 0x826, 0x80D, 0x836, 0x820, 0x829, 0x814
     };
@@ -16,7 +17,7 @@ namespace
         return info && !info->data.flags.any(RE::TOPIC_INFO_DATA::TOPIC_INFO_FLAGS::kSayOnce);
     }
 
-    void MarkRentalRefusalsHeard(std::string_view reason)
+    void MarkRentalRefusalsHeard()
     {
         auto* data = RE::TESDataHandler::GetSingleton();
         if (!data || !data->LookupModByName("Candlehearth.esp")) {
@@ -24,12 +25,14 @@ namespace
             return;
         }
 
-        std::array<RE::TESTopicInfo*, 11> infos{};
-        infos[0] = data->LookupForm<RE::TESTopicInfo>(0x09CC93, "Skyrim.esm");
+        std::array<RE::TESTopicInfo*, 12> infos{};
+        for (std::size_t i = 0; i < kVanillaRefusals.size(); ++i) {
+            infos[i] = data->LookupForm<RE::TESTopicInfo>(kVanillaRefusals[i], "Skyrim.esm");
+        }
         auto* shared = data->LookupForm<RE::TESTopicInfo>(0x813, "Candlehearth.esp");
-        infos[10] = shared;
+        infos.back() = shared;
         for (std::size_t i = 0; i < kCandlehearthRefusals.size(); ++i) {
-            infos[i + 1] = data->LookupForm<RE::TESTopicInfo>(kCandlehearthRefusals[i], "Candlehearth.esp");
+            infos[i + kVanillaRefusals.size()] = data->LookupForm<RE::TESTopicInfo>(kCandlehearthRefusals[i], "Candlehearth.esp");
         }
 
         // Validate the complete set before changing runtime state; a changed mod fails closed.
@@ -39,47 +42,27 @@ namespace
                 return;
             }
         }
-        for (std::size_t i = 1; i <= kCandlehearthRefusals.size(); ++i) {
+        for (std::size_t i = kVanillaRefusals.size(); i < infos.size() - 1; ++i) {
             if (infos[i]->dataInfo != shared) {
                 spdlog::error("Rental refusal response link changed; no dialogue changed");
                 return;
             }
         }
 
-        const bool vanillaWasHeard = infos[0]->saidOnce;
         // Reapply state without requesting save persistence through AddChange.
         for (auto* info : infos) {
             info->saidOnce = true;
         }
-        spdlog::info("Marked ten rental refusal INFOs and their shared response heard: {}; vanillaPreviouslyHeard={}",
-                     reason, vanillaWasHeard);
+        spdlog::info("Marked eleven rental refusal INFOs and their shared response heard");
     }
-
-    class DialogueEvents final : public RE::BSTEventSink<RE::MenuOpenCloseEvent>
-    {
-    public:
-        RE::BSEventNotifyControl ProcessEvent(const RE::MenuOpenCloseEvent* event,
-                                             RE::BSTEventSource<RE::MenuOpenCloseEvent>*) override
-        {
-            if (event && event->opening && event->menuName == RE::DialogueMenu::MENU_NAME) {
-                MarkRentalRefusalsHeard("dialogue open");
-            }
-            return RE::BSEventNotifyControl::kContinue;
-        }
-    };
-
-    DialogueEvents dialogueEvents;
 
     void OnMessage(SKSE::MessagingInterface::Message* message)
     {
         switch (message->type) {
         case SKSE::MessagingInterface::kDataLoaded:
-            RE::UI::GetSingleton()->AddEventSink<RE::MenuOpenCloseEvent>(&dialogueEvents);
-            MarkRentalRefusalsHeard("data loaded");
-            break;
         case SKSE::MessagingInterface::kNewGame:
         case SKSE::MessagingInterface::kPostLoadGame:
-            MarkRentalRefusalsHeard("new game or save load");
+            MarkRentalRefusalsHeard();
             break;
         default:
             break;
@@ -102,6 +85,6 @@ SKSEPluginLoad(const SKSE::LoadInterface* skse)
     spdlog::set_default_logger(std::move(log));
     spdlog::flush_on(spdlog::level::info);
     SKSE::Init(skse);
-    spdlog::info("CandlehearthRentDim 0.1.1 on {}", skse->RuntimeVersion().string());
+    spdlog::info("CandlehearthRentDim 0.1.2 on {}", skse->RuntimeVersion().string());
     return SKSE::GetMessagingInterface()->RegisterListener(OnMessage);
 }

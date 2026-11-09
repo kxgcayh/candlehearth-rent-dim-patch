@@ -1,6 +1,6 @@
 # Candlehearth Rent Dim Patch
 
-Version 0.1.1. Standalone SKSE test candidate for Skyrim AE 1.7.104.0.
+Version 0.1.2. Standalone SKSE test candidate for Skyrim AE 1.7.104.0.
 
 Dims rent topics as soon as a successful rental makes them unavailable. It preserves Candlehearth and Tavern AI Fix scripts and needs no ESP or additional Papyrus extender.
 
@@ -23,7 +23,7 @@ After a successful rental, Candlehearth sets Variable09 to 1. The next eligible 
 
 ## What the patch does
 
-Marks only the ten rental-refusal INFOs and their shared refusal response as heard in memory. When the refusal becomes eligible, it is already dim. Dialogue remains available and the refusal can still be spoken. No money, rental duration, ownership or dialogue conditions are changed. State is reapplied after loading a save and whenever dialogue opens; there is no Papyrus polling, dialogue playback or save-writing command.
+Marks only the eleven rental-refusal INFOs and their shared refusal response as heard in memory. When the refusal becomes eligible, it is already dim. Dialogue remains available and the refusal can still be spoken. No money, rental duration, ownership or dialogue conditions are changed. State is reapplied after loading a save; there is no Papyrus polling, dialogue playback or save-writing command.
 
 ## Install and test
 
@@ -31,7 +31,7 @@ Close Skyrim first. In MO2, create an empty mod named **Candlehearth Rent Dim Pa
 
 Launch through SKSE and load a save from before renting. Rent once: all rent-duration choices should dim when the refusal path becomes eligible, without asking again. Ask again: the normal refusal should play and no additional gold should be charged. Confirm that showing the room still follows Tavern AI Fix settings. Repeat for a capital and non-capital inn, each duration, and after save/reload and rental expiry. Do not overwrite your pre-test save.
 
-The log is `My Games/Skyrim Special Edition/SKSE/CandlehearthRentDim.log`. Expect `Marked ten rental refusal INFOs and their shared response heard`. A validation error means the patch left dialogue state untouched. To remove, close Skyrim and disable this mod in MO2.
+The log is `My Games/Skyrim Special Edition/SKSE/CandlehearthRentDim.log`. Expect `Marked eleven rental refusal INFOs and their shared response heard`. A validation error means the patch left dialogue state untouched. To remove, close Skyrim and disable this mod in MO2.
 
 ## Build from source
 
@@ -41,9 +41,9 @@ See [BUILDING.md](BUILDING.md). No archive has been created or published. Loose 
 
 Version 0.1.0 loaded successfully on AE 1.7.104. Live DevBench tests confirmed immediate dimming and correct charges with Hulda for a night (75), week (350) and month (1000). A repeated daily request played the normal refusal and charged no more gold. The unselected dimmed text was gray (#AAAAAA). Tavern AI Fix's show-room topic appeared.
 
-A broader test found Delphine's daily topic still bright after a successful 50-gold rental, while her weekly/monthly options dimmed. After the normal refusal was heard, Valga in Falkreath also passed a fresh 50-gold daily rental without a repeat. This suggests a state-lifetime gap; its exact reset trigger is not established.
+Version 0.1.1 was tested and still missed Delphine's daily topic. The cause is now identified: Delphine uses a separate vanilla daily refusal, 0009CC9A:Skyrim.esm, which was absent from the original ten-record list. It is not the generic refusal 0009CC93:Skyrim.esm. The dialogue-open workaround was unnecessary and has been removed.
 
-Version 0.1.1 adds an event-driven reapply whenever Dialogue Menu opens. It is compiled and its PE exports/SKSE metadata are verified, but it has NOT yet been installed or tested live. Replace the installed DLL with the staged 0.1.1 DLL and restart Skyrim before retesting. No update to game files has been performed by the agent.
+Version 0.1.2 adds that missing refusal, marking eleven refusals plus their shared response. An audit of every vanilla INFO with GetActorValue(Variable09)==1 found exactly the two ordinary rental refusals and one separate scripted main-quest INFO; the main-quest INFO is intentionally unchanged. Version 0.1.2 is compiled and independently binary-verified, but has NOT yet been installed or tested live. Close Skyrim, replace the installed DLL using the staged file, then restart for the final Delphine retest.
 
 Tests used added gold, coc, shipped ClearRoom cleanup between rentals, and two calendar jumps in the unsaved test session. No manual save command was issued. The calendar jumps did not establish natural rental expiry; expiry and reloading an active rental remain unverified. Full room-showing movement was not tested. See NOTES.md and test/live-results.json for precise evidence and limits.
 

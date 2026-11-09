@@ -37,14 +37,14 @@ def verify(path):
     assert {"SKSEPlugin_Load", "SKSEPlugin_Query", "SKSEPlugin_Version"} <= exports.keys()
     version = offset(exports["SKSEPlugin_Version"])
     assert u32(version) == 1, "unexpected metadata format"
-    assert u32(version + 4) == 0x10010, "expected plugin version 0.1.1"
+    assert u32(version + 4) == 0x10020, "expected plugin version 0.1.2"
     assert data[version + 8:version + 8 + 256].split(b"\0", 1)[0] == b"CandlehearthRentDim"
     assert u32(version + 0x304) & 2, "missing Address Library V5 compatibility flag"
     assert not u32(version + 0x304) & 1, "must declare struct dependence"
     runtime = (1 << 24) | (7 << 16) | (104 << 4)
     assert u32(version + 0x30C) == runtime, "wrong supported runtime"
     assert all(u32(version + 0x310 + 4 * i) == 0 for i in range(15)), "unexpected extra runtime"
-    print("PASS: AMD64 PE32+ DLL; SKSE Load/Query/Version exports; 0.1.1; struct dependent; V5; AE 1.7.104 only")
+    print("PASS: AMD64 PE32+ DLL; SKSE Load/Query/Version exports; 0.1.2; struct dependent; V5; AE 1.7.104 only")
     for name, rva in exports.items():
         print(f"  {name}: RVA 0x{rva:X}, file offset 0x{offset(rva):X}")
 
