@@ -43,9 +43,11 @@ Version 0.1.0 loaded successfully on AE 1.7.104. Live DevBench tests confirmed i
 
 Version 0.1.1 was tested and still missed Delphine's daily topic. The cause is now identified: Delphine uses a separate vanilla daily refusal, 0009CC9A:Skyrim.esm, which was absent from the original ten-record list. It is not the generic refusal 0009CC93:Skyrim.esm. The dialogue-open workaround was unnecessary and has been removed.
 
-Version 0.1.2 adds that missing refusal, marking eleven refusals plus their shared response. An audit of every vanilla INFO with GetActorValue(Variable09)==1 found exactly the two ordinary rental refusals and one separate scripted main-quest INFO; the main-quest INFO is intentionally unchanged. Version 0.1.2 is compiled and independently binary-verified, but has NOT yet been installed or tested live. Close Skyrim, replace the installed DLL using the staged file, then restart for the final Delphine retest.
+Version 0.1.2 adds that missing refusal, marking eleven refusals plus their shared response. Live checks passed for Delphine daily (50 gold), Hulda daily (75 gold), and a previously untested innkeeper, Keerava, for a week (350 gold). Rental topics dimmed immediately after success. Delphine's repeat request played the refusal and charged no additional gold. Evidence is in test/live-0.1.2.json.
 
-Tests used added gold, coc, shipped ClearRoom cleanup between rentals, and two calendar jumps in the unsaved test session. No manual save command was issued. The calendar jumps did not establish natural rental expiry; expiry and reloading an active rental remain unverified. Full room-showing movement was not tested. See NOTES.md and test/live-results.json for precise evidence and limits.
+A fresh-process, 24-hour test through Modern Wait Menu completed: Delphine's daily rental expired and Keerava's weekly rental remained active. This checks the in-game rental timer through waiting, not an actual bed-sleep animation. The attempted trip back to purchase another daily rental hit a separate rendering-path crash, so the post-expiry purchase itself was not completed. An earlier DevBench wait-tool timeout also caused an AI Process Fix safety abort during autosave; see NOTES.md for both distinct failures. No blanket claim of all save/reload, sleep, or rendering stability is made.
+
+Tests used added gold, coc, shipped ClearRoom cleanup between rentals, and two calendar jumps in the unsaved test session. No manual save command was issued. The earlier calendar jumps did not establish expiry. The later normal 24-hour wait did; reloading an active rental remains unverified. Full room-showing movement was not tested. See NOTES.md and test/live-results.json for precise evidence and limits.
 
 ## Credits and permissions
 

@@ -1,0 +1,18 @@
+{
+  "version": "0.1.2",
+  "case": "24h normal Modern Wait Menu, fresh process; rentals set up with shipped script methods",
+  "pid": 2976,
+  "before": {
+    "gameTime": 1.089348316192627,
+    "dailyVariable09": 1.0,
+    "weeklyVariable09": 1.0,
+    "gold": 1600
+  },
+  "after24h": {
+    "gameTime": 2.0986289978027344,
+    "dailyVariable09": 0.0,
+    "weeklyVariable09": 1.0,
+    "gold": 1600
+  },
+  "pass": true
+}

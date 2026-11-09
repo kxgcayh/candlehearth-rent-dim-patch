@@ -1,0 +1,290 @@
+[
+  {
+    "version": "0.1.2",
+    "innkeeper": "Delphine",
+    "case": "first daily purchase before any refusal",
+    "goldBefore": 2000,
+    "goldAfter": 1950,
+    "variable09": 1.0,
+    "successLines": [
+      "Sure thing. It's yours for a day."
+    ],
+    "before": [
+      {
+        "clipIndex": 4.0,
+        "text": "Heard any rumors lately?",
+        "topicIndex": 0.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 5.0,
+        "text": "I'd like to rent a room for a night. (50 gold)",
+        "topicIndex": 1.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 6.0,
+        "text": "I'd like to rent a room for a week. (250 gold)",
+        "topicIndex": 2.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 7.0,
+        "text": "I'd like to rent a room for a month. (750 gold)",
+        "topicIndex": 3.0,
+        "topicIsNew": true
+      }
+    ],
+    "after": [
+      {
+        "clipIndex": 3.0,
+        "text": "Heard any rumors lately?",
+        "topicIndex": 0.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 4.0,
+        "text": "I'd like to rent a room for a night. (50 gold)",
+        "topicIndex": 1.0,
+        "topicIsNew": false
+      },
+      {
+        "clipIndex": 5.0,
+        "text": "I'd like to rent a room for a week. (250 gold)",
+        "topicIndex": 2.0,
+        "topicIsNew": false
+      },
+      {
+        "clipIndex": 6.0,
+        "text": "I'd like to rent a room for a month. (750 gold)",
+        "topicIndex": 3.0,
+        "topicIsNew": false
+      }
+    ],
+    "pass": true
+  },
+  {
+    "version": "0.1.2",
+    "innkeeper": "Delphine",
+    "case": "repeat request",
+    "goldBefore": 1950,
+    "goldAfter": 1950,
+    "lines": [
+      "Are you joking? You just rented a room from me."
+    ],
+    "unselectedWeeklyTextColor": 11184810.0,
+    "pass": true
+  },
+  {
+    "version": "0.1.2",
+    "innkeeper": "Hulda",
+    "case": "first daily purchase regression",
+    "goldBefore": 1950,
+    "goldAfter": 1875,
+    "variable09": 1.0,
+    "successLines": [
+      "Sure thing. It's yours for a day."
+    ],
+    "before": [
+      {
+        "clipIndex": 4.0,
+        "text": "Heard any rumors lately?",
+        "topicIndex": 0.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 5.0,
+        "text": "I'd like to rent a room for a night. (75 gold)",
+        "topicIndex": 1.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 6.0,
+        "text": "I'd like to rent a room for a week. (350 gold)",
+        "topicIndex": 2.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 7.0,
+        "text": "I'd like to rent a room for a month. (1000 gold)",
+        "topicIndex": 3.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 8.0,
+        "text": "What have you got for sale?",
+        "topicIndex": 4.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 9.0,
+        "text": "Where can I learn more about magic?",
+        "topicIndex": 5.0,
+        "topicIsNew": true
+      }
+    ],
+    "after": [
+      {
+        "clipIndex": 3.0,
+        "text": "Heard any rumors lately?",
+        "topicIndex": 0.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 4.0,
+        "text": "I'd like to rent a room for a night. (75 gold)",
+        "topicIndex": 1.0,
+        "topicIsNew": false
+      },
+      {
+        "clipIndex": 5.0,
+        "text": "I'd like to rent a room for a week. (350 gold)",
+        "topicIndex": 2.0,
+        "topicIsNew": false
+      },
+      {
+        "clipIndex": 6.0,
+        "text": "I'd like to rent a room for a month. (1000 gold)",
+        "topicIndex": 3.0,
+        "topicIsNew": false
+      },
+      {
+        "clipIndex": 7.0,
+        "text": "Could you show me my room?",
+        "topicIndex": 4.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 8.0,
+        "text": "What have you got for sale?",
+        "topicIndex": 5.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 9.0,
+        "text": "Where can I learn more about magic?",
+        "topicIndex": 6.0,
+        "topicIsNew": true
+      }
+    ],
+    "pass": true
+  },
+  {
+    "version": "0.1.2",
+    "innkeeper": "Keerava",
+    "case": "previously untested innkeeper, weekly purchase",
+    "goldBefore": 1875,
+    "goldAfter": 1525,
+    "variable09": 1.0,
+    "successLines": [
+      "For that price? Sure."
+    ],
+    "before": [
+      {
+        "clipIndex": 4.0,
+        "text": "Heard any rumors lately?",
+        "topicIndex": 0.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 5.0,
+        "text": "I'd like to rent a room for a night. (75 gold)",
+        "topicIndex": 1.0,
+        "topicIsNew": false
+      },
+      {
+        "clipIndex": 6.0,
+        "text": "I'd like to rent a room for a week. (350 gold)",
+        "topicIndex": 2.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 7.0,
+        "text": "I'd like to rent a room for a month. (1000 gold)",
+        "topicIndex": 3.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 8.0,
+        "text": "What have you got for sale?",
+        "topicIndex": 4.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 9.0,
+        "text": "Any news or rumors floating about?",
+        "topicIndex": 5.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 10.0,
+        "text": "What's the word around town?",
+        "topicIndex": 6.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 11.0,
+        "text": "Where can I learn more about magic?",
+        "topicIndex": 7.0,
+        "topicIsNew": true
+      }
+    ],
+    "after": [
+      {
+        "clipIndex": 2.0,
+        "text": "Heard any rumors lately?",
+        "topicIndex": 0.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 3.0,
+        "text": "I'd like to rent a room for a night. (75 gold)",
+        "topicIndex": 1.0,
+        "topicIsNew": false
+      },
+      {
+        "clipIndex": 4.0,
+        "text": "I'd like to rent a room for a week. (350 gold)",
+        "topicIndex": 2.0,
+        "topicIsNew": false
+      },
+      {
+        "clipIndex": 5.0,
+        "text": "I'd like to rent a room for a month. (1000 gold)",
+        "topicIndex": 3.0,
+        "topicIsNew": false
+      },
+      {
+        "clipIndex": 6.0,
+        "text": "Could you show me my room?",
+        "topicIndex": 4.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 7.0,
+        "text": "What have you got for sale?",
+        "topicIndex": 5.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 8.0,
+        "text": "Any news or rumors floating about?",
+        "topicIndex": 6.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 9.0,
+        "text": "What's the word around town?",
+        "topicIndex": 7.0,
+        "topicIsNew": true
+      },
+      {
+        "clipIndex": 10.0,
+        "text": "Where can I learn more about magic?",
+        "topicIndex": 8.0,
+        "topicIsNew": true
+      }
+    ],
+    "pass": true
+  }
+]
