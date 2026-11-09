@@ -16,7 +16,7 @@ namespace
         return info && !info->data.flags.any(RE::TOPIC_INFO_DATA::TOPIC_INFO_FLAGS::kSayOnce);
     }
 
-    void MarkRentalRefusalsHeard()
+    void MarkRentalRefusalsHeard(std::string_view reason)
     {
         auto* data = RE::TESDataHandler::GetSingleton();
         if (!data || !data->LookupModByName("Candlehearth.esp")) {
@@ -46,20 +46,40 @@ namespace
             }
         }
 
-        // No AddChange: synthetic heard state is reapplied after loads, not written into saves.
+        const bool vanillaWasHeard = infos[0]->saidOnce;
+        // Reapply state without requesting save persistence through AddChange.
         for (auto* info : infos) {
             info->saidOnce = true;
         }
-        spdlog::info("Marked ten rental refusal INFOs and their shared response heard");
+        spdlog::info("Marked ten rental refusal INFOs and their shared response heard: {}; vanillaPreviouslyHeard={}",
+                     reason, vanillaWasHeard);
     }
+
+    class DialogueEvents final : public RE::BSTEventSink<RE::MenuOpenCloseEvent>
+    {
+    public:
+        RE::BSEventNotifyControl ProcessEvent(const RE::MenuOpenCloseEvent* event,
+                                             RE::BSTEventSource<RE::MenuOpenCloseEvent>*) override
+        {
+            if (event && event->opening && event->menuName == RE::DialogueMenu::MENU_NAME) {
+                MarkRentalRefusalsHeard("dialogue open");
+            }
+            return RE::BSEventNotifyControl::kContinue;
+        }
+    };
+
+    DialogueEvents dialogueEvents;
 
     void OnMessage(SKSE::MessagingInterface::Message* message)
     {
         switch (message->type) {
         case SKSE::MessagingInterface::kDataLoaded:
+            RE::UI::GetSingleton()->AddEventSink<RE::MenuOpenCloseEvent>(&dialogueEvents);
+            MarkRentalRefusalsHeard("data loaded");
+            break;
         case SKSE::MessagingInterface::kNewGame:
         case SKSE::MessagingInterface::kPostLoadGame:
-            MarkRentalRefusalsHeard();
+            MarkRentalRefusalsHeard("new game or save load");
             break;
         default:
             break;
@@ -82,6 +102,6 @@ SKSEPluginLoad(const SKSE::LoadInterface* skse)
     spdlog::set_default_logger(std::move(log));
     spdlog::flush_on(spdlog::level::info);
     SKSE::Init(skse);
-    spdlog::info("CandlehearthRentDim 0.1.0 on {}", skse->RuntimeVersion().string());
+    spdlog::info("CandlehearthRentDim 0.1.1 on {}", skse->RuntimeVersion().string());
     return SKSE::GetMessagingInterface()->RegisterListener(OnMessage);
 }

@@ -1,6 +1,6 @@
 # Candlehearth Rent Dim Patch
 
-Version 0.1.0. Standalone SKSE test candidate for Skyrim AE 1.7.104.0.
+Version 0.1.1. Standalone SKSE test candidate for Skyrim AE 1.7.104.0.
 
 Dims rent topics as soon as a successful rental makes them unavailable. It preserves Candlehearth and Tavern AI Fix scripts and needs no ESP or additional Papyrus extender.
 
@@ -23,7 +23,7 @@ After a successful rental, Candlehearth sets Variable09 to 1. The next eligible 
 
 ## What the patch does
 
-Marks only the ten rental-refusal INFOs and their shared refusal response as heard in memory. When the refusal becomes eligible, it is already dim. Dialogue remains available and the refusal can still be spoken. No money, rental duration, ownership or dialogue conditions are changed. State is reapplied after loading a save; there is no Papyrus polling, dialogue playback or save-writing command.
+Marks only the ten rental-refusal INFOs and their shared refusal response as heard in memory. When the refusal becomes eligible, it is already dim. Dialogue remains available and the refusal can still be spoken. No money, rental duration, ownership or dialogue conditions are changed. State is reapplied after loading a save and whenever dialogue opens; there is no Papyrus polling, dialogue playback or save-writing command.
 
 ## Install and test
 
@@ -39,7 +39,13 @@ See [BUILDING.md](BUILDING.md). No archive has been created or published. Loose 
 
 ## Verification status
 
-Compiled with clang-cl for Windows x64. Independently checked PE exports and SKSE metadata. Compared refusal IDs, flags and shared response links with Spriggit YAML of the pinned input. Not loaded or tested in game: DevBench was unavailable. Immediate dimming, save/reload, expiry, and Tavern AI Fix integration require the tests above.
+Version 0.1.0 loaded successfully on AE 1.7.104. Live DevBench tests confirmed immediate dimming and correct charges with Hulda for a night (75), week (350) and month (1000). A repeated daily request played the normal refusal and charged no more gold. The unselected dimmed text was gray (#AAAAAA). Tavern AI Fix's show-room topic appeared.
+
+A broader test found Delphine's daily topic still bright after a successful 50-gold rental, while her weekly/monthly options dimmed. After the normal refusal was heard, Valga in Falkreath also passed a fresh 50-gold daily rental without a repeat. This suggests a state-lifetime gap; its exact reset trigger is not established.
+
+Version 0.1.1 adds an event-driven reapply whenever Dialogue Menu opens. It is compiled and its PE exports/SKSE metadata are verified, but it has NOT yet been installed or tested live. Replace the installed DLL with the staged 0.1.1 DLL and restart Skyrim before retesting. No update to game files has been performed by the agent.
+
+Tests used added gold, coc, shipped ClearRoom cleanup between rentals, and two calendar jumps in the unsaved test session. No manual save command was issued. The calendar jumps did not establish natural rental expiry; expiry and reloading an active rental remain unverified. Full room-showing movement was not tested. See NOTES.md and test/live-results.json for precise evidence and limits.
 
 ## Credits and permissions
 

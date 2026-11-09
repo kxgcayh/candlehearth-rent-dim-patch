@@ -20,7 +20,7 @@ python3 build.py --write \
   --deps-prefix /Volumes/S512/Windows/Build-Tools/vcpkg/installed/x64-windows-cross
 ```
 
-The paths are this machine's verified prefixes; pass your equivalent prefixes elsewhere. Environment alternatives: CMAKE_TOOLCHAIN_FILE, COMMONLIB_PREFIX, DEPS_PREFIX. The build is capped at one job. Original source remains in src/; output is build/native/CandlehearthRentDim.dll. The verified loose install tree is dist/Candlehearth Rent Dim Patch/.
+The paths are this machine's verified prefixes; pass your equivalent prefixes elsewhere. Environment alternatives: CMAKE_TOOLCHAIN_FILE, COMMONLIB_PREFIX, DEPS_PREFIX. The build is capped at one job. Original source remains in src/; output is build/native/CandlehearthRentDim.dll. The binary-verified loose install tree is dist/Candlehearth Rent Dim Patch/.
 
 verify_binary.py independently reads the PE exports and SKSE metadata without loading the DLL. Cross-check with LLVM:
 
@@ -32,3 +32,7 @@ llvm-readobj --file-headers --coff-exports build/native/CandlehearthRentDim.dll
 release.toml is prepared for the shared tools/mod-release/release.py workflow. Do not run packaging until the user chooses Nexus, GitHub or both; do not publish without explicit instruction. No remote or public release exists. There is no FOMOD because the candidate has a single installable DLL.
 
 The build verifies architecture and metadata, not engine behavior. See README.md for the required in-game tests and NOTES.md for assumptions and limitations.
+
+## Live harness
+
+`python3 test/live_rent.py <innkeeper-ref> night|week|month <price>` is an opt-in MUTATING live test. It calls the shipped ClearRoom to reset that inn's rental, activates the NPC, selects a rent topic, checks gold and immediate heard state, then probes a repeat selection. It requires a loaded disposable test session, enough gold, DevBench and its gfx tool. It never issues a save command. It appends evidence to test/live-results.json. It can time out if input is consumed by the greeting; do not treat no charge as a patch failure. The JSON pass field on the first two recorded cases covers purchase/dimming and unchanged gold after the next input, not confirmed refusal playback (repeatLines was empty).

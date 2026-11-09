@@ -1,0 +1,66 @@
+[
+  {
+    "innkeeperRef": "0x1A66E",
+    "duration": "week",
+    "price": 350,
+    "goldBefore": 1925,
+    "goldAfter": 1575,
+    "rentalTopicsImmediatelyAfterPurchase": [
+      {
+        "clipIndex": 3.0,
+        "text": "I'd like to rent a room for a night. (75 gold)",
+        "topicIndex": 0.0,
+        "topicIsNew": false
+      },
+      {
+        "clipIndex": 4.0,
+        "text": "I'd like to rent a room for a week. (350 gold)",
+        "topicIndex": 1.0,
+        "topicIsNew": false
+      },
+      {
+        "clipIndex": 5.0,
+        "text": "I'd like to rent a room for a month. (1000 gold)",
+        "topicIndex": 2.0,
+        "topicIsNew": false
+      }
+    ],
+    "variable09": 1.0,
+    "showRoomTopicPresent": true,
+    "repeatLines": [],
+    "goldAfterRepeat": 1575,
+    "pass": true
+  },
+  {
+    "innkeeperRef": "0x1A66E",
+    "duration": "month",
+    "price": 1000,
+    "goldBefore": 1575,
+    "goldAfter": 575,
+    "rentalTopicsImmediatelyAfterPurchase": [
+      {
+        "clipIndex": 2.0,
+        "text": "I'd like to rent a room for a night. (75 gold)",
+        "topicIndex": 0.0,
+        "topicIsNew": false
+      },
+      {
+        "clipIndex": 3.0,
+        "text": "I'd like to rent a room for a week. (350 gold)",
+        "topicIndex": 1.0,
+        "topicIsNew": false
+      },
+      {
+        "clipIndex": 4.0,
+        "text": "I'd like to rent a room for a month. (1000 gold)",
+        "topicIndex": 2.0,
+        "topicIsNew": false
+      }
+    ],
+    "variable09": 1.0,
+    "showRoomTopicPresent": true,
+    "repeatLines": [],
+    "goldAfterRepeat": 575,
+    "pass": true
+  }
+]

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(CandlehearthRentDim VERSION 0.1.0 LANGUAGES CXX)
+project(CandlehearthRentDim VERSION 0.1.1 LANGUAGES CXX)
 find_package(CommonLibSSE CONFIG REQUIRED)
 # Explicit zero padding avoids CommonLib default-constructing unused versions as 1.0.0.
 set(SUPPORTED_RUNTIMES 1.7.104.0)
