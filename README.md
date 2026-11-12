@@ -53,6 +53,15 @@ Tests used added gold, coc, shipped ClearRoom cleanup between rentals, and two c
 
 Simon Magus, DeltaRider and wol for Candlehearth; Tavern AI Fix authors for its compatibility script; Dylbill for documenting the said-state API; CommonLibSSE-NG and SKSE contributors. No assets or scripts from those mods are distributed.
 
+Checked on 2026-11-13 against each mod's Nexus permission block and author notes, not its description or readme. The DLL ships no file or record from the mods below; it works on them only at runtime.
+
+| Mod | Author | What the Nexus page says | Status |
+|---|---|---|---|
+| [Candlehearth - An Inn Overhaul](https://www.nexusmods.com/skyrimspecialedition/mods/97542) | Simon Magus, DeltaRider and wol | Upload, modification, conversion and asset use are allowed. | allowed |
+| [Address Library for SKSE Plugins](https://www.nexusmods.com/skyrimspecialedition/mods/32444) | meh321 | Upload and asset use are allowed; modification is not. Runtime dependency only: nothing of it is shipped here. | allowed |
+
+Every source allows a patch like this with credit; credit the authors above when publishing.
+
 ## License
 
 Original source: MIT, kxgcayh, [LICENSE](LICENSE). Linked dependencies retain their own licenses; see [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt) and [COPYING](COPYING).
