@@ -15,12 +15,12 @@ The build used CommonLibSSE-NG commit 8eaddedd1542290701ccb0e9e88b2af8b3cea597 f
 ```sh
 python3 build.py
 python3 build.py --write \
-  --toolchain /Volumes/S512/Windows/Build-Tools/winsdk/toolchain/clang-cl-msvc.cmake \
-  --commonlib-prefix /Volumes/S512/Projects/ETC/skyrim-workspace/tools/CommonLibSSE-NG/build-install \
-  --deps-prefix /Volumes/S512/Windows/Build-Tools/vcpkg/installed/x64-windows-cross
+  --toolchain <clang-cl-msvc.cmake> \
+  --commonlib-prefix <CommonLibSSE-NG install prefix> \
+  --deps-prefix <vcpkg x64-windows dependency prefix>
 ```
 
-The paths are this machine's verified prefixes; pass your equivalent prefixes elsewhere. Environment alternatives: CMAKE_TOOLCHAIN_FILE, COMMONLIB_PREFIX, DEPS_PREFIX. The build is capped at one job. Original source remains in src/; output is build/native/CandlehearthRentDim.dll. The binary-verified loose install tree is dist/Candlehearth Rent Dim Patch/.
+Replace the placeholders with your own: a clang-cl/MSVC CMake toolchain file, the CommonLibSSE-NG install prefix built from the commit above, and the vcpkg prefix holding the Windows x64 dependencies. Environment alternatives: CMAKE_TOOLCHAIN_FILE, COMMONLIB_PREFIX, DEPS_PREFIX. The build is capped at one job. Original source remains in src/; output is build/native/CandlehearthRentDim.dll. The binary-verified loose install tree is dist/Candlehearth Rent Dim Patch/.
 
 verify_binary.py independently reads the PE exports and SKSE metadata without loading the DLL. Cross-check with LLVM:
 
